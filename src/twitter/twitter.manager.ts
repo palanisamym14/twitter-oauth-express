@@ -1,4 +1,5 @@
 import { twitterConfig } from './../config/config';
+import { urlConstant } from './../constants/url.constants';
 
 // tslint:disable-next-line:one-variable-per-declaration
 const request = require('request-promise'),
@@ -19,7 +20,7 @@ class TwitterManager {
   public oauthVerifier = async (req, res, next) => {
     try {
       const body = await request.post({
-        url: 'https://api.twitter.com/oauth/access_token?oauth_verifier',
+        url: urlConstant.OAUTH_VERIFIER,
         oauth: {
           consumer_key: twitterConfig.consumerKey,
           consumer_secret: twitterConfig.consumerSecret,
@@ -42,9 +43,9 @@ class TwitterManager {
   public requestToken = async (req, res) => {
     try {
       const body = await request.post({
-        url: 'https://api.twitter.com/oauth/request_token',
+        url: urlConstant.REQUEST_TOKEN,
         oauth: {
-          oauth_callback: 'http%3A%2F%2Flocalhost%3A3000%2Ftwitter-callback',
+          oauth_callback: urlConstant.TWITTER_CALLBACK,
           consumer_key: twitterConfig.consumerKey,
           consumer_secret: twitterConfig.consumerSecret,
         },
@@ -59,7 +60,7 @@ class TwitterManager {
   public getUserDetails = async (req, res) => {
     try {
       const body = await request.get({
-        url: 'https://api.twitter.com/1.1/users/show.json?screen_name=' + req.params.username,
+        url: `${urlConstant.USERS_SCREEN_NAME}${req.params.username}`,
         oauth: {
           consumer_key: twitterConfig.consumerKey,
           consumer_secret: twitterConfig.consumerSecret,
@@ -75,7 +76,7 @@ class TwitterManager {
   public getFollowersList = async (req, res) => {
     try {
       const body = await request.get({
-        url: 'https://api.twitter.com/1.1/followers/list.json?screen_name=' + req.params.username,
+        url:  `${urlConstant.USERS_FOLLOWERS_NAME}${req.params.username}`,
         oauth: {
           consumer_key: twitterConfig.consumerKey,
           consumer_secret: twitterConfig.consumerSecret,

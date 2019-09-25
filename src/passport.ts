@@ -11,8 +11,8 @@ export const passportAuth = () => {
     consumerKey: twitterConfig.consumerKey,
     consumerSecret: twitterConfig.consumerSecret,
     includeEmail: true,
-  },                                    (token, tokenSecret, profile, done) => {
-    return done(null, profile);
+  },                                    (token, tokenSecret, profile, cb) => {
+    return cb(null, profile);
   }));
 
 };
