@@ -42,7 +42,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 ## Install
 
-    $ git clone https://github.com/palanisamym14/twitter-oauth-express-api.git
+    $ git clone https://github.com/palanisamym14/twitter-oauth-express.git
     $ cd twitter-oauth-express-api
     $ yarn install
 
