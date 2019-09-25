@@ -1,3 +1,4 @@
+import { bodyParse } from 'helper/common.helper';
 import { twitterConfig } from './../config/config';
 import { urlConstant } from './../constants/url.constants';
 
@@ -28,9 +29,7 @@ class TwitterManager {
         },
         form: { oauth_verifier: req.query.oauth_verifier },
       });
-      const bodyString = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
-      const parsedBody = JSON.parse(bodyString);
-
+      const parsedBody = JSON.parse(bodyParse(body));
       req.body.oauth_token = parsedBody.oauth_token;
       req.body.oauth_token_secret = parsedBody.oauth_token_secret;
       req.body.user_id = parsedBody.user_id;
@@ -45,13 +44,12 @@ class TwitterManager {
       const body = await request.post({
         url: urlConstant.REQUEST_TOKEN,
         oauth: {
-          oauth_callback: urlConstant.TWITTER_CALLBACK,
           consumer_key: twitterConfig.consumerKey,
           consumer_secret: twitterConfig.consumerSecret,
+          oauth_callback: urlConstant.TWITTER_CALLBACK,
         },
       });
-      const jsonStr = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
-      res.send(JSON.parse(jsonStr));
+      res.send(JSON.parse(bodyParse(body)));
     } catch (err) {
       return res.send(500, { message: err.message });
     }
