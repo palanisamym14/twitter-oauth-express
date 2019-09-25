@@ -46,7 +46,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ cd twitter-oauth-express
     $ yarn install
 
-## Configure app
+## Configure Twitter API Config [dev.twitter.com](https://developer.twitter.com)
 
 Open `src/config/config.ts` then edit it with your twitter oauth keys. 
 
