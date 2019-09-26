@@ -1,6 +1,6 @@
-import { bodyParse } from 'helper/common.helper';
 import { twitterConfig } from './../config/config';
 import { urlConstant } from './../constants/url.constants';
+import { bodyParse } from './../helper/common.helper';
 
 // tslint:disable-next-line:one-variable-per-declaration
 const request = require('request-promise'),
@@ -89,7 +89,7 @@ class TwitterManager {
   public createToken = (auth) => {
     return jwt.sign({
       id: auth.id,
-    }, 'react-oauth', {
+    },              'react-oauth', {
       expiresIn: 60 * 120,
     });
   }
@@ -97,7 +97,7 @@ class TwitterManager {
   public generateToken = (req, res, next) => {
     req.token = this.createToken(req.auth);
     return next();
-  };
+  }
 
   public sendToken = (req, res) => {
     res.setHeader('x-auth-token', req.token);
